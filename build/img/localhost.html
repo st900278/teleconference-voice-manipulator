@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <!--Import Google Icon Font-->
+  <link href="localhost_files/icon.css" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="localhost_files/materialize.css" media="screen,projection">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="blue lighten-5">
+  <div class="container">
+    <div class="row">
+      <div class="col s10">
+        <h1>Video Conference</h1>
+      </div>
+      <div class="col s2" style="padding:20px;">
+        <button class="btn" id="isDetect">
+          Start Detect
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div id="audio">
+
+      </div>
+      <div class="row blue lighten-3" style="text-align:center;">
+        <div class="row" style="padding:10px;">
+          <video></video>
+        </div>
+        <div class="row" id="call-panel">
+          <a class="btn-floating btn-large waves-effect waves-light green lighten-1" id="call"><i class="material-icons">call</i></a>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col s8">
+        </div>
+      </div>
+      <div class="row" id="status-select">
+        <div class="col s12">
+          <ul class="tabs tabs-fixed-width">
+            <li class="tab"><a class="active" href="#test1" data-target="setting-self">Setting1</a></li>
+            <li class="tab"><a href="#test2" data-target="setting-other">Setting 2</a></li>
+            <li class="tab"><a href="#test3" data-target="lock">No setting</a></li>
+          <div class="indicator" style="right: 875px; left: 0px;"></div></ul>
+        </div>
+      </div>
+      <div id="setting-self" class="row control-panel">
+        <h4>Send-voice</h4>
+        <div class="col s4">
+
+          <div class="card-panel blue lighten-4">
+            <h5>Pitch Shift</h5>
+            <div class="row">
+              <div class="col s10">
+                <input id="self-pitch-shift" min="0" max="100" value="50" type="range"><span class="thumb"><span class="value"></span></span>
+              </div>
+              <div class="col s2">
+                <span id="self-pitch-data">0</span>
+              </div>
+            </div>
+            <div class="row">
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="card-panel blue lighten-4">
+            <h5>Volume</h5>
+            <div class="row">
+              <div class="col s10">
+                <input id="self-volume-shift" min="0" max="29" step="1" value="15" type="range"><span class="thumb"><span class="value"></span></span>
+              </div>
+              <div class="col s2">
+                <span id="self-volume-data">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="row">
+            <div class="col s8">
+              <h5>Pitch Detect</h5>
+            </div>
+            <div class="col s4">
+              <button class="btn" id="clear-self">clear</button>
+            </div>
+          </div>
+          <div class="row">
+            <h5>Original</h5>
+            <table>
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>freq</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>mean</td>
+                  <td id="self-pitch-mean"></td>
+                </tr>
+                <tr>
+                  <td>sd</td>
+                  <td id="self-pitch-sd"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="row">
+            <h5>New</h5>
+            <table>
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>freq</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>mean</td>
+                  <td id="self-pitch-mean-new"></td>
+                </tr>
+                <tr>
+                  <td>sd</td>
+                  <td id="self-pitch-sd-new"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+
+      </div>
+      <div id="setting-other" class="row hide control-panel">
+        <h4>Receive-voice</h4>
+        <div class="col s4">
+          <div class="card-panel blue lighten-4">
+            <h5>Pitch Shift</h5>
+            <div class="row">
+              <div class="col s10">
+                <input id="other-pitch-shift" min="0" max="100" value="50" type="range"><span class="thumb"><span class="value"></span></span>
+              </div>
+              <div class="col s2">
+                <span id="other-pitch-data">0</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="card-panel blue lighten-4">
+            <h5>Volume</h5>
+            <div class="row">
+              <div class="col s10">
+                <input id="other-volume-shift" min="0" max="29" step="1" value="15" type="range"><span class="thumb"><span class="value"></span></span>
+              </div>
+              <div class="col s2">
+                <span id="other-volume-data">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="row">
+            <div class="col s8">
+              <h5>Pitch Detect</h5>
+            </div>
+            <div class="col s4">
+              <button class="btn" id="clear-other">clear</button>
+            </div>
+          </div>
+          <div class="row">
+            <h5>Original</h5>
+            <table>
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>freq</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>mean</td>
+                  <td id="other-pitch-mean"></td>
+                </tr>
+                <tr>
+                  <td>sd</td>
+                  <td id="other-pitch-sd"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <h5>New</h5>
+            <table>
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>freq</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>mean</td>
+                  <td id="other-pitch-mean-new"></td>
+                </tr>
+                <tr>
+                  <td>sd</td>
+                  <td id="other-pitch-sd-new"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="lock" class="row hide control-panel">
+        NOTHING
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script type="text/javascript" src="localhost_files/jquery.js"></script>
+  <script type="text/javascript" src="localhost_files/materialize.js"></script>
+  <script type="text/javascript" src="localhost_files/module2.js"></script>
+  <script type="text/javascript" src="localhost_files/module1.js"></script>
+
+
+
+
+
+
+<div class="hiddendiv common"></div></body></html>
