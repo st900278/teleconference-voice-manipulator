@@ -302,7 +302,7 @@ function startStream(stream, init) {
 
         pitchAnalyzer.input(inputData);
         pitchAnalyzer.process();
-        var tone = pitchAnalyzer.findTone(60, 250);
+        var tone = pitchAnalyzer.findTone(80, 180);
         if (tone !== null) {
           //console.log('Old, frequency:', tone.freq);
           if(pitchListOther.length >= 5000)pitchListOther.shift();
@@ -339,7 +339,7 @@ function startStream(stream, init) {
 
         pitchAnalyzerNew.input(inputData);
         pitchAnalyzerNew.process();
-        var tone = pitchAnalyzerNew.findTone(60, 250);
+        var tone = pitchAnalyzerNew.findTone(80, 180);
         if (tone !== null) {
           console.log('Found a tone, frequency:', tone.freq, 'volume:', tone.db);
           if(pitchListOtherNew.length >= 5000)pitchListOtherNew.shift();
