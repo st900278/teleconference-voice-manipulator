@@ -146,11 +146,16 @@ if (navigator.mediaDevices) {
           gainNodeSelf.disconnect();
           pitchShiftSelf.disconnect();
           scriptNodeNew.disconnect();
+          source.connect(gainNodeSelf);
+          gainNodeSelf.connect(pitchShiftSelf);
+          pitchShiftSelf.connect(dest);
+          /*
           source.connect(scriptNode);
           scriptNode.connect(gainNodeSelf);
           gainNodeSelf.connect(pitchShiftSelf);
           pitchShiftSelf.connect(scriptNodeNew);
           scriptNodeNew.connect(dest);
+          */
         }
         document.getElementById("self-pitch-mean").innerHTML = "0";
         document.getElementById("self-pitch-sd").innerHTML = "0";
@@ -392,8 +397,8 @@ function startStream(stream, init) {
         pitchShiftOther.disconnect();
         scriptNodeNew.disconnect();
 
-        receiveSource.connect(scriptNode);
-        scriptNode.connect(gainNodeOther);
+        receiveSource.connect(gainNodeOther);
+        //scriptNode.connect(gainNodeOther);
         gainNodeOther.connect(pitchShiftOther);
 
         pitchShiftOther.connect(scriptNodeNew);
